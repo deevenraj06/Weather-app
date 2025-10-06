@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>index.html</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #d5b778;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bababa;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+index.html</font>
+</center></td></tr></table>
+<pre><span class="s0">&lt;!doctype </span><span class="s2">html</span><span class="s0">&gt;</span>
+<span class="s0">&lt;html </span><span class="s2">lang</span><span class="s3">=&quot;en&quot;</span><span class="s0">&gt;</span>
+<span class="s0">&lt;head&gt;</span>
+    <span class="s0">&lt;meta </span><span class="s2">charset</span><span class="s3">=&quot;utf-8&quot; </span><span class="s0">/&gt;</span>
+    <span class="s0">&lt;meta </span><span class="s2">name</span><span class="s3">=&quot;viewport&quot; </span><span class="s2">content</span><span class="s3">=&quot;width=device-width,initial-scale=1&quot; </span><span class="s0">/&gt;</span>
+    <span class="s0">&lt;title&gt;</span><span class="s1">Simple Weather App</span><span class="s0">&lt;/title&gt;</span>
+
+    <span class="s4">&lt;!-- Google Font --&gt;</span>
+    <span class="s0">&lt;link </span><span class="s2">href</span><span class="s3">=&quot;https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&amp;display=swap&quot; </span><span class="s2">rel</span><span class="s3">=&quot;stylesheet&quot;</span><span class="s0">&gt;</span>
+
+    <span class="s0">&lt;link </span><span class="s2">rel</span><span class="s3">=&quot;stylesheet&quot; </span><span class="s2">href</span><span class="s3">=&quot;style.css&quot; </span><span class="s0">/&gt;</span>
+<span class="s0">&lt;/head&gt;</span>
+<span class="s0">&lt;body&gt;</span>
+<span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;container&quot;</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;header </span><span class="s2">class</span><span class="s3">=&quot;app-header&quot;</span><span class="s0">&gt;</span>
+        <span class="s0">&lt;h1&gt;</span><span class="s1">Weather</span><span class="s0">&lt;/h1&gt;</span>
+        <span class="s0">&lt;p </span><span class="s2">class</span><span class="s3">=&quot;sub&quot;</span><span class="s0">&gt;</span><span class="s1">Simple weather app — OpenWeatherMap API</span><span class="s0">&lt;/p&gt;</span>
+    <span class="s0">&lt;/header&gt;</span>
+
+    <span class="s0">&lt;form </span><span class="s2">id</span><span class="s3">=&quot;search-form&quot; </span><span class="s2">class</span><span class="s3">=&quot;search&quot;</span><span class="s0">&gt;</span>
+        <span class="s0">&lt;input </span><span class="s2">id</span><span class="s3">=&quot;city-input&quot; </span><span class="s2">type</span><span class="s3">=&quot;search&quot; </span><span class="s2">placeholder</span><span class="s3">=&quot;Enter city (e.g. London)&quot; </span><span class="s2">aria-label</span><span class="s3">=&quot;City name&quot; </span><span class="s2">autocomplete</span><span class="s3">=&quot;off&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;button </span><span class="s2">type</span><span class="s3">=&quot;submit&quot; </span><span class="s2">id</span><span class="s3">=&quot;search-btn&quot;</span><span class="s0">&gt;</span><span class="s1">Search</span><span class="s0">&lt;/button&gt;</span>
+        <span class="s0">&lt;button </span><span class="s2">type</span><span class="s3">=&quot;button&quot; </span><span class="s2">id</span><span class="s3">=&quot;loc-btn&quot; </span><span class="s2">title</span><span class="s3">=&quot;Use my location&quot;</span><span class="s0">&gt;</span><span class="s1">📍</span><span class="s0">&lt;/button&gt;</span>
+    <span class="s0">&lt;/form&gt;</span>
+
+    <span class="s0">&lt;div </span><span class="s2">id</span><span class="s3">=&quot;error&quot; </span><span class="s2">class</span><span class="s3">=&quot;message error hidden&quot; </span><span class="s2">role</span><span class="s3">=&quot;alert&quot;</span><span class="s0">&gt;&lt;/div&gt;</span>
+    <span class="s0">&lt;div </span><span class="s2">id</span><span class="s3">=&quot;loading&quot; </span><span class="s2">class</span><span class="s3">=&quot;message hidden&quot;</span><span class="s0">&gt;&lt;span </span><span class="s2">class</span><span class="s3">=&quot;loader&quot; </span><span class="s2">aria-hidden</span><span class="s3">=&quot;true&quot;</span><span class="s0">&gt;&lt;/span&gt; </span><span class="s1">Loading…</span><span class="s0">&lt;/div&gt;</span>
+
+    <span class="s0">&lt;main </span><span class="s2">id</span><span class="s3">=&quot;card&quot; </span><span class="s2">class</span><span class="s3">=&quot;card hidden&quot; </span><span class="s2">aria-live</span><span class="s3">=&quot;polite&quot;</span><span class="s0">&gt;</span>
+        <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;card-top&quot;</span><span class="s0">&gt;</span>
+            <span class="s0">&lt;div&gt;</span>
+                <span class="s0">&lt;h2 </span><span class="s2">id</span><span class="s3">=&quot;location&quot;</span><span class="s0">&gt;&lt;/h2&gt;</span>
+                <span class="s0">&lt;p </span><span class="s2">id</span><span class="s3">=&quot;desc&quot; </span><span class="s2">class</span><span class="s3">=&quot;muted&quot;</span><span class="s0">&gt;&lt;/p&gt;</span>
+            <span class="s0">&lt;/div&gt;</span>
+            <span class="s0">&lt;img </span><span class="s2">id</span><span class="s3">=&quot;icon&quot; </span><span class="s2">alt</span><span class="s3">=&quot;&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;/div&gt;</span>
+
+        <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;main-temp&quot;</span><span class="s0">&gt;</span>
+            <span class="s0">&lt;div </span><span class="s2">id</span><span class="s3">=&quot;temp&quot; </span><span class="s2">class</span><span class="s3">=&quot;temp&quot;</span><span class="s0">&gt;&lt;/div&gt;</span>
+            <span class="s0">&lt;button </span><span class="s2">id</span><span class="s3">=&quot;unit-toggle&quot; </span><span class="s2">class</span><span class="s3">=&quot;unit&quot;</span><span class="s0">&gt;</span><span class="s1">°C</span><span class="s0">&lt;/button&gt;</span>
+        <span class="s0">&lt;/div&gt;</span>
+
+        <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;details&quot;</span><span class="s0">&gt;</span>
+            <span class="s0">&lt;div&gt;</span><span class="s1">Humidity: </span><span class="s0">&lt;span </span><span class="s2">id</span><span class="s3">=&quot;humidity&quot;</span><span class="s0">&gt;&lt;/span&gt;&lt;/div&gt;</span>
+            <span class="s0">&lt;div&gt;</span><span class="s1">Wind: </span><span class="s0">&lt;span </span><span class="s2">id</span><span class="s3">=&quot;wind&quot;</span><span class="s0">&gt;&lt;/span&gt;&lt;/div&gt;</span>
+            <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;muted small&quot; </span><span class="s2">id</span><span class="s3">=&quot;updated&quot;</span><span class="s0">&gt;&lt;/div&gt;</span>
+        <span class="s0">&lt;/div&gt;</span>
+    <span class="s0">&lt;/main&gt;</span>
+
+    <span class="s0">&lt;footer </span><span class="s2">class</span><span class="s3">=&quot;footer muted small&quot;</span><span class="s0">&gt;</span><span class="s1">Tip: press Enter to search — API calls limited by your OpenWeatherMap plan.</span><span class="s0">&lt;/footer&gt;</span>
+<span class="s0">&lt;/div&gt;</span>
+
+<span class="s0">&lt;script </span><span class="s2">src</span><span class="s3">=&quot;script.js&quot;</span><span class="s0">&gt;&lt;/script&gt;</span>
+<span class="s0">&lt;/body&gt;</span>
+<span class="s0">&lt;/html&gt;</span></pre>
+</body>
+</html>

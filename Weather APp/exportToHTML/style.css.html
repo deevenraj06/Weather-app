@@ -1,0 +1,121 @@
+<html>
+<head>
+<title>style.css</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+.s1 { color: #2aacb8;}
+.s2 { color: #6aab73;}
+.s3 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+style.css</font>
+</center></td></tr></table>
+<pre><span class="s0">:root{</span>
+  <span class="s0">--bg1: #</span><span class="s1">60</span><span class="s0">a5fa;</span>
+  <span class="s0">--bg2: #</span><span class="s1">7</span><span class="s0">dd3fc;</span>
+  <span class="s0">--card-bg: rgba(</span><span class="s1">255</span><span class="s0">,</span><span class="s1">255</span><span class="s0">,</span><span class="s1">255</span><span class="s0">,</span><span class="s1">0.95</span><span class="s0">);</span>
+  <span class="s0">--muted: #</span><span class="s1">6</span><span class="s0">b7280;</span>
+  <span class="s0">--accent: #</span><span class="s1">0</span><span class="s0">ea5e9;</span>
+  <span class="s0">--shadow: </span><span class="s1">0 8</span><span class="s0">px </span><span class="s1">24</span><span class="s0">px rgba(</span><span class="s1">2</span><span class="s0">,</span><span class="s1">6</span><span class="s0">,</span><span class="s1">23</span><span class="s0">,</span><span class="s1">0.12</span><span class="s0">);</span>
+  <span class="s0">--radius: </span><span class="s1">14</span><span class="s0">px;</span>
+<span class="s0">}</span>
+
+<span class="s0">*{box-sizing:border-box}</span>
+<span class="s0">html,body{height:</span><span class="s1">100</span><span class="s0">%}</span>
+<span class="s0">body{</span>
+  <span class="s0">margin:</span><span class="s1">0</span><span class="s0">;</span>
+  <span class="s0">font-family: </span><span class="s2">&quot;Inter&quot;</span><span class="s0">, system-ui, -apple-system, </span><span class="s2">&quot;Segoe UI&quot;</span><span class="s0">, Roboto, </span><span class="s2">&quot;Helvetica Neue&quot;</span><span class="s0">, Arial;</span>
+  <span class="s0">background: linear-gradient(</span><span class="s1">135</span><span class="s0">deg,var(--bg1),var(--bg2));</span>
+  <span class="s0">display:flex;</span>
+  <span class="s0">align-items:center;</span>
+  <span class="s0">justify-content:center;</span>
+  <span class="s0">padding:</span><span class="s1">28</span><span class="s0">px;</span>
+  <span class="s0">color:#</span><span class="s1">0</span><span class="s0">f172a;</span>
+<span class="s0">}</span>
+
+<span class="s0">.container{</span>
+  <span class="s0">width:</span><span class="s1">100</span><span class="s0">%;</span>
+  <span class="s0">max-width:</span><span class="s1">420</span><span class="s0">px;</span>
+<span class="s0">}</span>
+
+<span class="s0">.app-header{ text-align:center; margin-bottom:</span><span class="s1">16</span><span class="s0">px; color:white; }</span>
+<span class="s0">.app-header h1{ margin:</span><span class="s1">0</span><span class="s0">; font-size:</span><span class="s1">28</span><span class="s0">px; font-weight:</span><span class="s1">700</span><span class="s0">; color:rgba(</span><span class="s1">255</span><span class="s0">,</span><span class="s1">255</span><span class="s0">,</span><span class="s1">255</span><span class="s0">,</span><span class="s1">0.98</span><span class="s0">) }</span>
+<span class="s0">.app-header .sub{ margin:</span><span class="s1">4</span><span class="s0">px </span><span class="s1">0 12</span><span class="s0">px; font-size:</span><span class="s1">13</span><span class="s0">px; color:rgba(</span><span class="s1">255</span><span class="s0">,</span><span class="s1">255</span><span class="s0">,</span><span class="s1">255</span><span class="s0">,</span><span class="s1">0.9</span><span class="s0">) }</span>
+
+<span class="s0">.search{</span>
+  <span class="s0">display:flex;</span>
+  <span class="s0">gap:</span><span class="s1">8</span><span class="s0">px;</span>
+  <span class="s0">margin-bottom:</span><span class="s1">12</span><span class="s0">px;</span>
+<span class="s0">}</span>
+<span class="s0">.search input{</span>
+  <span class="s0">flex:</span><span class="s1">1</span><span class="s0">;</span>
+  <span class="s0">padding:</span><span class="s1">10</span><span class="s0">px </span><span class="s1">12</span><span class="s0">px;</span>
+  <span class="s0">border-radius:</span><span class="s1">10</span><span class="s0">px;</span>
+  <span class="s0">border:</span><span class="s1">0</span><span class="s0">;</span>
+  <span class="s0">outline:none;</span>
+  <span class="s0">font-size:</span><span class="s1">15</span><span class="s0">px;</span>
+  <span class="s0">box-shadow: var(--shadow);</span>
+<span class="s0">}</span>
+<span class="s0">.search button{</span>
+  <span class="s0">padding:</span><span class="s1">10</span><span class="s0">px </span><span class="s1">12</span><span class="s0">px;</span>
+  <span class="s0">border-radius:</span><span class="s1">10</span><span class="s0">px;</span>
+  <span class="s0">border:</span><span class="s1">0</span><span class="s0">;</span>
+  <span class="s0">background:var(--card-bg);</span>
+  <span class="s0">cursor:pointer;</span>
+  <span class="s0">box-shadow: var(--shadow);</span>
+  <span class="s0">font-weight:</span><span class="s1">600</span><span class="s0">;</span>
+<span class="s0">}</span>
+
+<span class="s0">.message{ padding:</span><span class="s1">10</span><span class="s0">px </span><span class="s1">12</span><span class="s0">px; border-radius:</span><span class="s1">10</span><span class="s0">px; text-align:center; margin-bottom:</span><span class="s1">12</span><span class="s0">px; background:var(--card-bg); box-shadow:var(--shadow) }</span>
+<span class="s0">.message.error{ color:#b91c1c; border:</span><span class="s1">1</span><span class="s0">px solid rgba(</span><span class="s1">185</span><span class="s0">,</span><span class="s1">28</span><span class="s0">,</span><span class="s1">28</span><span class="s0">,</span><span class="s1">0.08</span><span class="s0">) }</span>
+<span class="s0">.hidden{ display:none; }</span>
+
+<span class="s0">.card{</span>
+  <span class="s0">background: var(--card-bg);</span>
+  <span class="s0">padding:</span><span class="s1">18</span><span class="s0">px;</span>
+  <span class="s0">border-radius:var(--radius);</span>
+  <span class="s0">box-shadow:var(--shadow);</span>
+<span class="s0">}</span>
+<span class="s0">.card-top{</span>
+  <span class="s0">display:flex;</span>
+  <span class="s0">justify-content:space-between;</span>
+  <span class="s0">align-items:center;</span>
+<span class="s0">}</span>
+<span class="s0">.card-top img{ width:</span><span class="s1">88</span><span class="s0">px; height:</span><span class="s1">88</span><span class="s0">px; object-fit:contain; }</span>
+
+<span class="s0">.location{ font-weight:</span><span class="s1">700</span><span class="s0">; }</span>
+<span class="s0">#location{ margin:</span><span class="s1">0</span><span class="s0">; font-size:</span><span class="s1">18</span><span class="s0">px; font-weight:</span><span class="s1">700 </span><span class="s0">}</span>
+<span class="s0">.muted{ color:var(--muted) }</span>
+<span class="s0">.small{ font-size:</span><span class="s1">12</span><span class="s0">px }</span>
+
+<span class="s0">.main-temp{ display:flex; align-items:center; gap:</span><span class="s1">12</span><span class="s0">px; margin-top:</span><span class="s1">10</span><span class="s0">px; margin-bottom:</span><span class="s1">8</span><span class="s0">px; }</span>
+<span class="s0">.temp{ font-size:</span><span class="s1">44</span><span class="s0">px; font-weight:</span><span class="s1">700</span><span class="s0">; line-height:</span><span class="s1">1 </span><span class="s0">}</span>
+<span class="s0">.unit{ padding:</span><span class="s1">6</span><span class="s0">px </span><span class="s1">10</span><span class="s0">px; border-radius:</span><span class="s1">8</span><span class="s0">px; border:</span><span class="s1">0</span><span class="s0">; background:transparent; cursor:pointer; color:var(--accent); font-weight:</span><span class="s1">600 </span><span class="s0">}</span>
+
+<span class="s0">.details{ display:flex; flex-direction:column; gap:</span><span class="s1">6</span><span class="s0">px; margin-top:</span><span class="s1">8</span><span class="s0">px; font-size:</span><span class="s1">14</span><span class="s0">px }</span>
+
+<span class="s0">.footer{ text-align:center; margin-top:</span><span class="s1">14</span><span class="s0">px; color:rgba(</span><span class="s1">255</span><span class="s0">,</span><span class="s1">255</span><span class="s0">,</span><span class="s1">255</span><span class="s0">,</span><span class="s1">0.9</span><span class="s0">) }</span>
+
+<span class="s3">/* loader */</span>
+<span class="s0">.loader{</span>
+  <span class="s0">display:inline-block;</span>
+  <span class="s0">width:</span><span class="s1">18</span><span class="s0">px; height:</span><span class="s1">18</span><span class="s0">px;</span>
+  <span class="s0">border:</span><span class="s1">3</span><span class="s0">px solid rgba(</span><span class="s1">0</span><span class="s0">,</span><span class="s1">0</span><span class="s0">,</span><span class="s1">0</span><span class="s0">,</span><span class="s1">0.08</span><span class="s0">);</span>
+  <span class="s0">border-left-color: rgba(</span><span class="s1">0</span><span class="s0">,</span><span class="s1">0</span><span class="s0">,</span><span class="s1">0</span><span class="s0">,</span><span class="s1">0.36</span><span class="s0">);</span>
+  <span class="s0">border-radius:</span><span class="s1">50</span><span class="s0">%;</span>
+  <span class="s0">animation:spin .</span><span class="s1">7</span><span class="s0">s linear infinite;</span>
+<span class="s0">}</span>
+<span class="s0">@keyframes spin{ to{ transform:rotate(</span><span class="s1">360</span><span class="s0">deg) } }</span>
+
+<span class="s3">/* Responsive */</span>
+<span class="s0">@media (max-width:</span><span class="s1">420</span><span class="s0">px){</span>
+  <span class="s0">.card-top img{ width:</span><span class="s1">72</span><span class="s0">px; height:</span><span class="s1">72</span><span class="s0">px; }</span>
+  <span class="s0">.temp{ font-size:</span><span class="s1">36</span><span class="s0">px; }</span>
+<span class="s0">}</span></pre>
+</body>
+</html>

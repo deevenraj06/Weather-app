@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Simple Weather App</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="container">
+    <header class="app-header">
+        <h1>Weather</h1>
+        <p class="sub">Simple weather app — OpenWeatherMap API</p>
+    </header>
+
+    <form id="search-form" class="search">
+        <input id="city-input" type="search" placeholder="Enter city (e.g. London)" aria-label="City name" autocomplete="off" />
+        <button type="submit" id="search-btn">Search</button>
+        <button type="button" id="loc-btn" title="Use my location">📍</button>
+    </form>
+
+    <div id="error" class="message error hidden" role="alert"></div>
+    <div id="loading" class="message hidden"><span class="loader" aria-hidden="true"></span> Loading…</div>
+
+    <main id="card" class="card hidden" aria-live="polite">
+        <div class="card-top">
+            <div>
+                <h2 id="location"></h2>
+                <p id="desc" class="muted"></p>
+            </div>
+            <img id="icon" alt="" />
+        </div>
+
+        <div class="main-temp">
+            <div id="temp" class="temp"></div>
+            <button id="unit-toggle" class="unit">°C</button>
+        </div>
+
+        <div class="details">
+            <div>Humidity: <span id="humidity"></span></div>
+            <div>Wind: <span id="wind"></span></div>
+            <div class="muted small" id="updated"></div>
+        </div>
+    </main>
+
+    <footer class="footer muted small">Tip: press Enter to search — API calls limited by your OpenWeatherMap plan.</footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

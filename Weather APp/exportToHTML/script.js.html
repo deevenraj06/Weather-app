@@ -1,0 +1,156 @@
+<html>
+<head>
+<title>script.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #7a7e85;}
+.s1 { color: #bcbec4;}
+.s2 { color: #6aab73;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+script.js</font>
+</center></td></tr></table>
+<pre><span class="s0">// Replace with your OpenWeatherMap API key:</span>
+<span class="s1">const apiKey = </span><span class="s2">'bcaeb745ab8592976b6afb66167778b2'</span><span class="s1">;</span>
+
+<span class="s1">const form = document.getElementById(</span><span class="s2">'search-form'</span><span class="s1">);</span>
+<span class="s1">const input = document.getElementById(</span><span class="s2">'city-input'</span><span class="s1">);</span>
+<span class="s1">const locBtn = document.getElementById(</span><span class="s2">'loc-btn'</span><span class="s1">);</span>
+
+<span class="s1">const card = document.getElementById(</span><span class="s2">'card'</span><span class="s1">);</span>
+<span class="s1">const locationEl = document.getElementById(</span><span class="s2">'location'</span><span class="s1">);</span>
+<span class="s1">const tempEl = document.getElementById(</span><span class="s2">'temp'</span><span class="s1">);</span>
+<span class="s1">const descEl = document.getElementById(</span><span class="s2">'desc'</span><span class="s1">);</span>
+<span class="s1">const iconEl = document.getElementById(</span><span class="s2">'icon'</span><span class="s1">);</span>
+<span class="s1">const humidityEl = document.getElementById(</span><span class="s2">'humidity'</span><span class="s1">);</span>
+<span class="s1">const windEl = document.getElementById(</span><span class="s2">'wind'</span><span class="s1">);</span>
+<span class="s1">const updatedEl = document.getElementById(</span><span class="s2">'updated'</span><span class="s1">);</span>
+
+<span class="s1">const errorEl = document.getElementById(</span><span class="s2">'error'</span><span class="s1">);</span>
+<span class="s1">const loadingEl = document.getElementById(</span><span class="s2">'loading'</span><span class="s1">);</span>
+<span class="s1">const unitToggle = document.getElementById(</span><span class="s2">'unit-toggle'</span><span class="s1">);</span>
+
+<span class="s1">let lastData = </span><span class="s3">null</span><span class="s1">; </span><span class="s0">// store the latest fetch result</span>
+<span class="s1">let showCelsius = </span><span class="s3">true</span><span class="s1">;</span>
+
+<span class="s3">function </span><span class="s1">showLoading(){ loadingEl.classList.remove(</span><span class="s2">'hidden'</span><span class="s1">); }</span>
+<span class="s3">function </span><span class="s1">hideLoading(){ loadingEl.classList.add(</span><span class="s2">'hidden'</span><span class="s1">); }</span>
+<span class="s3">function </span><span class="s1">showError(msg){ errorEl.textContent = msg; errorEl.classList.remove(</span><span class="s2">'hidden'</span><span class="s1">); }</span>
+<span class="s3">function </span><span class="s1">clearError(){ errorEl.classList.add(</span><span class="s2">'hidden'</span><span class="s1">); errorEl.textContent = </span><span class="s2">''</span><span class="s1">; }</span>
+
+<span class="s3">function </span><span class="s1">showCard(){ card.classList.remove(</span><span class="s2">'hidden'</span><span class="s1">); }</span>
+<span class="s3">function </span><span class="s1">hideCard(){ card.classList.add(</span><span class="s2">'hidden'</span><span class="s1">); }</span>
+
+<span class="s1">async </span><span class="s3">function </span><span class="s1">fetchWeatherByCity(city){</span>
+  <span class="s1">clearError(); showLoading();</span>
+  <span class="s3">try </span><span class="s1">{</span>
+    <span class="s1">const url = `https:</span><span class="s0">//api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&amp;appid=${apiKey}&amp;units=metric`;</span>
+    <span class="s1">const res = await fetch(url);</span>
+    <span class="s3">if </span><span class="s1">(!res.ok) {</span>
+      <span class="s3">if </span><span class="s1">(res.status === </span><span class="s4">401</span><span class="s1">) </span><span class="s3">throw new </span><span class="s1">Error(</span><span class="s2">'Invalid API key. Put your OpenWeatherMap key in script.js.'</span><span class="s1">);</span>
+      <span class="s3">if </span><span class="s1">(res.status === </span><span class="s4">404</span><span class="s1">) </span><span class="s3">throw new </span><span class="s1">Error(</span><span class="s2">'City not found. Check spelling.'</span><span class="s1">);</span>
+      <span class="s3">throw new </span><span class="s1">Error(</span><span class="s2">'Failed to fetch weather data.'</span><span class="s1">);</span>
+    <span class="s1">}</span>
+    <span class="s1">const data = await res.json();</span>
+    <span class="s1">lastData = data;</span>
+    <span class="s1">renderWeather(data);</span>
+    <span class="s0">// cache last result for quick reload</span>
+    <span class="s1">localStorage.setItem(</span><span class="s2">'weather_last'</span><span class="s1">, JSON.stringify({ data, ts: Date.now() }));</span>
+  <span class="s1">} </span><span class="s3">catch </span><span class="s1">(err) {</span>
+    <span class="s1">showError(err.message);</span>
+    <span class="s1">hideCard();</span>
+  <span class="s1">} </span><span class="s3">finally </span><span class="s1">{</span>
+    <span class="s1">hideLoading();</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+
+<span class="s1">async </span><span class="s3">function </span><span class="s1">fetchWeatherByCoords(lat, lon){</span>
+  <span class="s1">clearError(); showLoading();</span>
+  <span class="s3">try </span><span class="s1">{</span>
+    <span class="s1">const url = `https:</span><span class="s0">//api.openweathermap.org/data/2.5/weather?lat=${lat}&amp;lon=${lon}&amp;appid=${apiKey}&amp;units=metric`;</span>
+    <span class="s1">const res = await fetch(url);</span>
+    <span class="s3">if </span><span class="s1">(!res.ok) </span><span class="s3">throw new </span><span class="s1">Error(</span><span class="s2">'Failed to fetch location weather.'</span><span class="s1">);</span>
+    <span class="s1">const data = await res.json();</span>
+    <span class="s1">lastData = data;</span>
+    <span class="s1">renderWeather(data);</span>
+    <span class="s1">localStorage.setItem(</span><span class="s2">'weather_last'</span><span class="s1">, JSON.stringify({ data, ts: Date.now() }));</span>
+  <span class="s1">} </span><span class="s3">catch </span><span class="s1">(err) {</span>
+    <span class="s1">showError(err.message);</span>
+  <span class="s1">} </span><span class="s3">finally </span><span class="s1">{</span>
+    <span class="s1">hideLoading();</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+
+<span class="s3">function </span><span class="s1">renderWeather(data){</span>
+  <span class="s1">showCard();</span>
+  <span class="s1">const name = data.name;</span>
+  <span class="s1">const country = data.sys?.country || </span><span class="s2">''</span><span class="s1">;</span>
+  <span class="s1">locationEl.textContent = `${name}, ${country}`;</span>
+
+  <span class="s1">const w = data.weather?.[</span><span class="s4">0</span><span class="s1">];</span>
+  <span class="s1">const desc = w?.description ?? </span><span class="s2">''</span><span class="s1">;</span>
+  <span class="s1">descEl.textContent = desc[</span><span class="s4">0</span><span class="s1">]?.toUpperCase() + desc.slice(</span><span class="s4">1</span><span class="s1">);</span>
+
+  <span class="s1">const icon = w?.icon;</span>
+  <span class="s1">iconEl.src = icon ? `https:</span><span class="s0">//openweathermap.org/img/wn/${icon}@2x.png` : '';</span>
+  <span class="s1">iconEl.alt = w?.description || </span><span class="s2">'weather icon'</span><span class="s1">;</span>
+
+  <span class="s0">// temperatures (we store metric base in API)</span>
+  <span class="s1">const tempC = Math.round(data.main?.temp);</span>
+  <span class="s1">tempEl.textContent = showCelsius ? `${tempC}°C` : `${cToF(tempC)}°F`;</span>
+
+  <span class="s1">humidityEl.textContent = `${data.main?.humidity ?? </span><span class="s2">'-'</span><span class="s1">}%`;</span>
+  <span class="s1">windEl.textContent = `${data.wind?.speed ?? </span><span class="s2">'-'</span><span class="s1">} m/s`;</span>
+
+  <span class="s1">updatedEl.textContent = `Updated: ${</span><span class="s3">new </span><span class="s1">Date((data.dt || Date.now()) * </span><span class="s4">1000</span><span class="s1">).toLocaleString()}`;</span>
+  <span class="s1">unitToggle.textContent = showCelsius ? </span><span class="s2">'°C' </span><span class="s1">: </span><span class="s2">'°F'</span><span class="s1">;</span>
+<span class="s1">}</span>
+
+<span class="s3">function </span><span class="s1">cToF(c){ </span><span class="s3">return </span><span class="s1">Math.round((c * </span><span class="s4">9</span><span class="s1">) / </span><span class="s4">5 </span><span class="s1">+ </span><span class="s4">32</span><span class="s1">); }</span>
+<span class="s3">function </span><span class="s1">fToC(f){ </span><span class="s3">return </span><span class="s1">Math.round((f - </span><span class="s4">32</span><span class="s1">) * </span><span class="s4">5 </span><span class="s1">/ </span><span class="s4">9</span><span class="s1">); }</span>
+
+<span class="s0">/* EVENTS */</span>
+<span class="s1">form.addEventListener(</span><span class="s2">'submit'</span><span class="s1">, e =&gt; {</span>
+  <span class="s1">e.preventDefault();</span>
+  <span class="s1">const q = input.value.trim();</span>
+  <span class="s3">if </span><span class="s1">(!q) { showError(</span><span class="s2">'Please type a city name'</span><span class="s1">); </span><span class="s3">return</span><span class="s1">; }</span>
+  <span class="s1">fetchWeatherByCity(q);</span>
+<span class="s1">});</span>
+
+<span class="s1">locBtn.addEventListener(</span><span class="s2">'click'</span><span class="s1">, () =&gt; {</span>
+  <span class="s3">if </span><span class="s1">(!navigator.geolocation) { showError(</span><span class="s2">'Geolocation not supported by your browser'</span><span class="s1">); </span><span class="s3">return</span><span class="s1">; }</span>
+  <span class="s1">navigator.geolocation.getCurrentPosition(pos =&gt; {</span>
+    <span class="s1">fetchWeatherByCoords(pos.coords.latitude, pos.coords.longitude);</span>
+  <span class="s1">}, err =&gt; {</span>
+    <span class="s1">showError(</span><span class="s2">'Unable to retrieve location. Allow location permission and try again.'</span><span class="s1">);</span>
+  <span class="s1">});</span>
+<span class="s1">});</span>
+
+<span class="s0">// Unit toggle</span>
+<span class="s1">unitToggle.addEventListener(</span><span class="s2">'click'</span><span class="s1">, () =&gt; {</span>
+  <span class="s1">showCelsius = !showCelsius;</span>
+  <span class="s3">if </span><span class="s1">(!lastData) </span><span class="s3">return</span><span class="s1">;</span>
+  <span class="s0">// We always have API metric value in lastData.main.temp</span>
+  <span class="s1">const baseC = Math.round(lastData.main.temp);</span>
+  <span class="s1">tempEl.textContent = showCelsius ? `${baseC}°C` : `${cToF(baseC)}°F`;</span>
+  <span class="s1">unitToggle.textContent = showCelsius ? </span><span class="s2">'°C' </span><span class="s1">: </span><span class="s2">'°F'</span><span class="s1">;</span>
+<span class="s1">});</span>
+
+<span class="s0">// Load cached result on start (optional)</span>
+<span class="s1">window.addEventListener(</span><span class="s2">'load'</span><span class="s1">, () =&gt; {</span>
+  <span class="s3">try </span><span class="s1">{</span>
+    <span class="s1">const cached = JSON.parse(localStorage.getItem(</span><span class="s2">'weather_last'</span><span class="s1">) || </span><span class="s2">'null'</span><span class="s1">);</span>
+    <span class="s3">if </span><span class="s1">(cached?.data) {</span>
+      <span class="s1">lastData = cached.data;</span>
+      <span class="s1">renderWeather(cached.data);</span>
+    <span class="s1">}</span>
+  <span class="s1">} </span><span class="s3">catch </span><span class="s1">(e) { </span><span class="s0">/* ignore */ </span><span class="s1">}</span>
+<span class="s1">});</span></pre>
+</body>
+</html>
